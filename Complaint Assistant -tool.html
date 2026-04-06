@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Assistant - Complete Tool</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Plus Jakarta Sans', sans-serif; }
+        :root {
+            --purple-50: #faf5ff; --purple-100: #f3e8ff; --purple-200: #e9d5ff;
+            --purple-300: #d8b4fe; --purple-400: #c084fc; --purple-500: #a855f7;
+            --purple-600: #9333ea; --purple-700: #7e22ce; --purple-800: #6b21a5;
+            --purple-gradient: linear-gradient(145deg, #9333ea, #6b21a5);
+            --card-bg: #ffffff;
+        }
+        body { background: linear-gradient(145deg, #faf5ff 0%, #f3e8ff 100%); min-height: 100vh; }
+        .bg-purple-50 { background-color: var(--purple-50); }
+        .bg-purple-100 { background-color: var(--purple-100); }
+        .text-purple-500 { color: var(--purple-500); }
+        .text-purple-600 { color: var(--purple-600); }
+        .text-purple-700 { color: var(--purple-700); }
+        .text-purple-800 { color: var(--purple-800); }
+        .navbar-custom { background: var(--purple-gradient); box-shadow: 0 10px 30px -10px rgba(147, 51, 234, 0.3); padding: 1rem 0; }
+        .navbar-brand { color: white !important; font-weight: 800; font-size: 1.6rem; }
+        .navbar-brand i { background: rgba(255,255,255,0.2); padding: 10px; border-radius: 12px; margin-right: 10px; }
+        .main-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .path-card { background: var(--card-bg); border: none; border-radius: 24px; padding: 1.5rem; margin-bottom: 1.5rem; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 30px -15px rgba(147, 51, 234, 0.15); border: 1px solid rgba(147, 51, 234, 0.1); }
+        .path-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -15px rgba(147, 51, 234, 0.25); border-color: var(--purple-300); }
+        .path-card.selected { border: 2px solid var(--purple-500); background: linear-gradient(145deg, #ffffff, #faf5ff); }
+        .path-card.payment-highlight { border: 2px solid var(--purple-400); background: linear-gradient(145deg, #ffffff, #f3e8ff); }
+        .main-category { font-size: 1.2rem; font-weight: 700; color: var(--purple-800); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--purple-200); display: flex; align-items: center; }
+        .main-category i { margin-right: 10px; color: var(--purple-500); background: var(--purple-100); padding: 8px; border-radius: 10px; }
+        .sub-category { font-weight: 600; color: var(--purple-700); margin: 1rem 0 0.8rem 0; font-size: 1.1rem; }
+        .sub-category i { margin-right: 8px; font-size: 0.9rem; color: var(--purple-500); }
+        .issue-type { display: inline-block; padding: 0.6rem 1.2rem; background: #faf5ff; border: 1px solid var(--purple-200); border-radius: 12px; margin: 0.3rem; cursor: pointer; transition: all 0.2s; font-weight: 600; font-size: 0.9rem; color: var(--purple-700); }
+        .issue-type:hover { border-color: var(--purple-500); background: var(--purple-100); transform: scale(1.02); }
+        .issue-type.selected { background: var(--purple-gradient); border-color: var(--purple-800); color: white; box-shadow: 0 5px 15px -5px var(--purple-600); }
+        .description-box { background: #faf5ff; border: 1px solid var(--purple-200); border-radius: 16px; padding: 1.2rem; min-height: 120px; transition: all 0.3s; width: 100%; font-size: 0.95rem; }
+        .description-box:focus { outline: none; border-color: var(--purple-500); background: white; box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.1); }
+        .template-card { background: #faf5ff; border: 1px solid var(--purple-200); border-radius: 16px; padding: 1rem; cursor: pointer; transition: all 0.3s; margin-bottom: 0.8rem; }
+        .template-card:hover { border-color: var(--purple-500); background: var(--purple-50); transform: translateX(-5px); box-shadow: 0 5px 15px -10px var(--purple-600); }
+        .btn-purple-custom { background: var(--purple-gradient); color: white; border: none; padding: 0.8rem 2rem; border-radius: 14px; font-weight: 600; transition: all 0.3s; box-shadow: 0 10px 20px -10px var(--purple-600); }
+        .btn-purple-custom:hover { transform: translateY(-2px); box-shadow: 0 15px 30px -10px var(--purple-700); color: white; }
+        .btn-outline-purple-custom { border: 2px solid var(--purple-500); color: var(--purple-700); background: transparent; padding: 0.8rem 2rem; border-radius: 14px; font-weight: 600; transition: all 0.3s; }
+        .btn-outline-purple-custom:hover { background: var(--purple-gradient); border-color: transparent; color: white; transform: translateY(-2px); }
+        .selected-path-box { background: linear-gradient(145deg, #faf5ff, #f3e8ff); border: 1px solid var(--purple-300); border-radius: 20px; padding: 1.5rem; text-align: left; font-size: 0.85rem; }
+        .progress-step { text-align: center; padding: 1.2rem; background: white; border-radius: 16px; border: 1px solid var(--purple-200); color: var(--purple-500); font-weight: 600; position: relative; overflow: hidden; }
+        .progress-step.active { background: var(--purple-gradient); border-color: transparent; color: white; box-shadow: 0 10px 20px -10px var(--purple-600); }
+        .progress-step.completed { background: var(--purple-600); border-color: transparent; color: white; }
+        .suggestion-chip { display: inline-block; padding: 0.5rem 1.2rem; background: #faf5ff; border: 1px solid var(--purple-200); border-radius: 30px; margin: 0.2rem; cursor: pointer; transition: all 0.3s; font-size: 0.9rem; color: var(--purple-700); }
+        .suggestion-chip:hover { background: var(--purple-500); border-color: var(--purple-600); color: white; transform: translateY(-2px); box-shadow: 0 5px 15px -5px var(--purple-600); }
+        .copy-btn { background: white; border: 1px solid var(--purple-300); color: var(--purple-700); border-radius: 12px; padding: 0.5rem 1.5rem; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+        .copy-btn:hover { background: var(--purple-100); border-color: var(--purple-500); transform: translateY(-2px); }
+        .undo-btn { background: white; border: 1px solid var(--purple-300); color: var(--purple-700); border-radius: 12px; padding: 0.5rem 1.5rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-weight: 500; margin-left: 10px; }
+        .undo-btn:hover { background: var(--purple-100); border-color: var(--purple-500); }
+        .refresh-btn { background: white; border: 1px solid var(--purple-300); color: var(--purple-700); border-radius: 12px; padding: 0.5rem 1.5rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+        .refresh-btn:hover { background: var(--purple-100); border-color: var(--purple-500); }
+        .path-unms { color: var(--purple-800); font-weight: 700; background: linear-gradient(145deg, #9333ea, #6b21a5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .path-remedy { color: var(--purple-600); font-weight: 600; }
+        .path-separator { border-bottom: 1px dashed var(--purple-400); margin: 8px 0; }
+        .summary-unms { color: var(--purple-800); font-weight: 700; }
+        .summary-remedy { color: var(--purple-700); font-weight: 600; }
+        .summary-separator { border-bottom: 1px dotted var(--purple-400); margin: 6px 0; }
+        .selected-path-summary-box { background: linear-gradient(145deg, #faf5ff, #f3e8ff); border: 1px solid var(--purple-300); border-radius: 16px; padding: 1rem; margin-bottom: 1rem; }
+        .table thead th { background: var(--purple-100); color: var(--purple-800); font-weight: 700; border: none; }
+        .path-row { cursor: pointer; transition: background-color 0.3s; }
+        .path-row:hover { background-color: var(--purple-50) !important; }
+        .undo-toast { position: fixed; bottom: 30px; right: 30px; background: var(--purple-800); color: white; padding: 12px 24px; border-radius: 50px; font-size: 0.9rem; font-weight: 500; z-index: 9999; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2); animation: slideInUp 0.3s ease; pointer-events: none; }
+        @keyframes slideInUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .version-badge { position: fixed; bottom: 15px; left: 15px; background: var(--purple-100); color: var(--purple-700); padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; z-index: 1000; }
+        @media (max-width: 768px) { .path-card { padding: 1rem; } .issue-type { padding: 0.5rem 1rem; } .main-category { font-size: 1rem; } }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-headset"></i> Complaint Assistant
+        </a>
+        <div class="d-flex text-white gap-3">
+            <button class="refresh-btn" id="refreshDataBtn" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);">
+                <i class="fas fa-sync-alt"></i> Refresh Data
+            </button>
+        </div>
+    </div>
+</nav>
+
+<div class="main-container">
+    <div class="container-fluid">
+        <!-- Progress Steps -->
+        <div class="row mb-4 g-3">
+            <div class="col-4"><div class="progress-step active" id="step1"><i class="fas fa-search me-2"></i><span class="d-none d-md-inline">Step 1:</span> Select Path</div></div>
+            <div class="col-4"><div class="progress-step" id="step2"><i class="fas fa-pen me-2"></i><span class="d-none d-md-inline">Step 2:</span> Describe Issue</div></div>
+            <div class="col-4"><div class="progress-step" id="step3"><i class="fas fa-check me-2"></i><span class="d-none d-md-inline">Step 3:</span> Confirm</div></div>
+        </div>
+
+        <!-- Step 1: Path Selection -->
+        <div id="step1Content">
+            <div class="row">
+                <div class="col-lg-7 mb-4" id="categoriesContainer">
+                    <div class="text-center p-5"><div class="spinner-border text-purple-600" role="status"></div><p class="mt-3">Loading data...</p></div>
+                </div>
+                <div class="col-lg-5 mb-4">
+                    <div class="path-card">
+                        <h5 class="text-purple-700 mb-3"><i class="fas fa-check-circle me-2 text-purple-500"></i> Selected Path</h5>
+                        <div id="selectedPathDisplay" class="selected-path-box mb-4"><i class="fas fa-arrow-left fa-2x text-purple-400 mb-2"></i><p class="text-muted mb-0">No path selected yet</p></div>
+                        <h6 class="text-purple-700 mb-3"><i class="fas fa-lightbulb me-2 text-purple-500"></i> Description Templates:</h6>
+                        <div id="templatesContainer"></div>
+                        <button class="btn-purple-custom w-100 mt-3" onclick="goToStep2()">Next: Describe Issue <i class="fas fa-arrow-right ms-2"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Describe Issue -->
+        <div id="step2Content" style="display: none;">
+            <div class="row"><div class="col-lg-8 mx-auto"><div class="path-card">
+                <h5 class="text-purple-700 mb-4"><i class="fas fa-pen me-2 text-purple-500"></i> Describe the Issue</h5>
+                <div class="selected-path-summary-box" id="selectedPathSummaryContainer"><span class="fw-bold text-purple-800">Selected Path:</span><div id="selectedPathSummaryWithBreak" class="mt-2"></div></div>
+                <label class="text-purple-700 fw-bold mb-2"><i class="fas fa-pencil-alt me-2 text-purple-500"></i> Description:</label>
+                <textarea class="description-box" id="problemDescription" placeholder="Double click on any word to select it, then click any suggestion below to replace" rows="4"></textarea>
+                <div class="d-flex align-items-center mt-2">
+                    <button class="copy-btn" id="copyButton"><i class="far fa-copy"></i> Copy Text</button>
+                    <button class="undo-btn" id="undoButton"><i class="fas fa-undo-alt"></i> Undo</button>
+                </div>
+                <div class="mt-3" id="suggestionsContainer"></div>
+                <div class="d-flex gap-2 mt-4"><button class="btn-purple-custom flex-grow-1" onclick="goToStep3()">Review & Confirm <i class="fas fa-check ms-2"></i></button><button class="btn-outline-purple-custom" onclick="backToStep1()"><i class="fas fa-arrow-left"></i></button></div>
+            </div></div></div>
+        </div>
+
+        <!-- Step 3: Confirm -->
+        <div id="step3Content" style="display: none;">
+            <div class="row"><div class="col-lg-8 mx-auto"><div class="path-card">
+                <h5 class="text-purple-700 mb-4 text-center"><i class="fas fa-check-circle me-2 text-purple-500"></i> Confirm Complaint Details</h5>
+                <div class="bg-purple-50 p-4 rounded-4 mb-4"><h6 class="text-purple-800 mb-3"><i class="fas fa-road me-2 text-purple-500"></i> Full Path:</h6><p id="confirmPath" class="p-3 bg-white rounded-3 fw-bold border border-purple-200"></p><h6 class="text-purple-800 mb-3"><i class="fas fa-pen me-2 text-purple-500"></i> Description:</h6><p id="confirmDescription" class="p-3 bg-white rounded-3 border border-purple-200"></p></div>
+                <div class="mb-4"><div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="confirmCheck1" style="border-color: var(--purple-500);"><label class="form-check-label" for="confirmCheck1">I have selected the correct path</label></div><div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="confirmCheck2" style="border-color: var(--purple-500);"><label class="form-check-label" for="confirmCheck2">Description is clear and includes necessary details</label></div></div>
+                <div class="d-grid gap-2"><button class="btn-purple-custom" onclick="submitComplaint()"><i class="fas fa-paper-plane me-2"></i> Submit Complaint</button><button class="btn-outline-purple-custom" onclick="restartProcess()"><i class="fas fa-redo me-2"></i> Start Over</button></div>
+            </div></div></div>
+        </div>
+
+        <!-- Quick Reference Table -->
+        <div class="row mt-5"><div class="col-12"><div class="path-card"><h5 class="text-purple-700 mb-3"><i class="fas fa-table me-2 text-purple-500"></i> Quick Reference - All Paths</h5><div class="table-responsive" style="max-height: 400px; overflow-y: auto; border-radius: 16px;"><table class="table table-hover" id="quickRefTable"><thead class="bg-purple-200"><tr><th>Category</th><th>Sub Category</th><th>Issue</th><th>Path</th></tr></thead><tbody id="quickRefBody"><tr><td colspan="4" class="text-center">Loading...</td></tr></tbody></table></div></div></div></div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content" style="border-radius: 24px;"><div class="modal-body text-center p-4"><div class="bg-purple-100 rounded-circle d-inline-flex p-3 mb-3"><i class="fas fa-check-circle fa-4x text-purple-600"></i></div><h4 class="text-purple-800 mb-3">Complaint Submitted!</h4><p class="text-muted mb-4">The complaint has been sent to the correct department</p><button class="btn-purple-custom px-5" data-bs-dismiss="modal">OK</button></div></div></div></div>
+
+<div class="version-badge" id="versionBadge"><i class="fas fa-database me-1"></i> Version: <span id="dataVersion">--</span></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Configuration - Change this URL to your data.json location
+    const DATA_URL = 'data.json';
+    
+    let currentFullPath = '';
+    let undoHistory = [];
+    let appData = null;
+    
+    // ========== Load Data ==========
+    async function loadData(showToastMsg = false) {
+        try {
+            const response = await fetch(DATA_URL + '?t=' + Date.now());
+            if (!response.ok) throw new Error('Failed to load data');
+            appData = await response.json();
+            document.getElementById('dataVersion').textContent = appData.version || '1.0.0';
+            renderAllComponents();
+            if (showToastMsg) showMessage('Data refreshed successfully!', 'var(--purple-800)');
+        } catch (error) {
+            console.error('Error loading data:', error);
+            if (showToastMsg) showMessage('Failed to load data, using fallback', '#dc3545');
+            useFallbackData();
+        }
+    }
+    
+    function useFallbackData() {
+        appData = {
+            version: "1.0.0-fallback",
+            categories: [
+                { id: "callCenter", title: "Postpaid > Call Center", icon: "fas fa-phone-alt", subtitle: "Issue Types:", items: [
+                    { name: "Wrong Info", fullPath: "(UNMS) Postpaid > Call Center > Wrong Info (Remedy) Complaint > Consumer > Escalation > Call Center > Wrong Info", templateId: "wrongInfoTemplates" },
+                    { name: "Wrong Transaction", fullPath: "(UNMS) Postpaid > Call Center > Wrong Transaction (Remedy) Complaint > Consumer > Escalation > Call Center > Wrong Transaction", templateId: "wrongTransactionTemplates" },
+                    { name: "Bad Attitude", fullPath: "(UNMS) Postpaid > Call Center > Bad Attitude (Remedy) Complaint > Consumer > Escalation > Call Center > Aggressive -attitude", templateId: "badAttitudeTemplates" },
+                    { name: "Lack of follow up", fullPath: "(UNMS) Postpaid > Call Center > Lack of follow up (Remedy) Complaint > Consumer > Escalation > Call Center > Lack of follow up", templateId: "lackFollowUpTemplates" }
+                ]},
+                { id: "retail", title: "Postpaid > Retail", icon: "fas fa-store", subtitle: "Issue Types:", items: [
+                    { name: "Wrong Info", fullPath: "(UNMS) Postpaid > Retail > Wrong Info (Remedy) Complaint > Consumer > Escalation > Retail > Wrong Info", templateId: "wrongInfoTemplates" },
+                    { name: "Wrong Transaction", fullPath: "(UNMS) Postpaid > Retail > Wrong Transaction (Remedy) Complaint > Consumer > Escalation > Retail > Wrong Transaction", templateId: "wrongTransactionTemplates" },
+                    { name: "Bad Attitude", fullPath: "(UNMS) Postpaid > Retail > Bad Attitude (Remedy) Complaint > Consumer > Escalation > Retail > Bad Attitude", templateId: "badAttitudeTemplates" },
+                    { name: "Lack of follow up", fullPath: "(UNMS) Postpaid > Retail > Lack of follow up (Remedy) Complaint > Consumer > Escalation > Retail > Lack of follow up", templateId: "lackFollowUpTemplates" }
+                ]},
+                { id: "policy", title: "Policy & Procedures", icon: "fas fa-file-contract", subtitle: "Issue Types:", items: [
+                    { name: "Policy – Dissatisfied", fullPath: "(UNMS) Policy & procedures – policy – dissatisfied (Remedy) Complaint > Consumer > Policy and Procedures > Activation Process > Activation Process", templateId: "policyTemplates" }
+                ]},
+                { id: "billing", title: "Postpaid > Billing", icon: "fas fa-file-invoice-dollar", subtitle: "Issue Types:", highlight: true, items: [
+                    { name: "Due Amount", fullPath: "(UNMS) Postpaid > Billing > Due Amount (Remedy) Complaint > Consumer > Billing> Due amount > Due amount", templateId: "billingTemplates" }
+                ]},
+                { id: "promiseToPay", title: "Promise to Pay", icon: "fas fa-handshake", subtitle: "Request Types:", items: [
+                    { name: "Deal Active CST", fullPath: "Request > Consumer > Payment and Collection > Deal > Deal Active CST", templateId: "remedyTemplates" },
+                    { name: "Deal Hotline CST", fullPath: "Request > Consumer > Payment and Collection > Deal > Deal Hotline CST", templateId: "remedyTemplates" },
+                    { name: "Deal Suspension CST", fullPath: "Request > Consumer > Payment and Collection > Deal > Deal Suspension CST", templateId: "remedyTemplates" },
+                    { name: "Extend old Deal", fullPath: "Request > Consumer > Payment and Collection > Deal > Extend old Deal", templateId: "remedyTemplates" }
+                ]},
+                { id: "billingAdditional", title: "Billing (Additional)", icon: "fas fa-credit-card", subtitle: "Types:", items: [
+                    { name: "Cash flow problem", fullPath: "Complaint > Consumer > Billing > Due amount-Cash Flow Problem > Cash flow problem", templateId: "billingAdditionalTemplates" },
+                    { name: "Refund Prepayment Cash", fullPath: "Request > Consumer > Payment and Collection > Refund Prepayment Cash > Refund Prepayment Cash", templateId: "billingAdditionalTemplates" }
+                ]},
+                { id: "loyalty", title: "WE Bonus (Loyalty Program)", icon: "fas fa-gift", subtitle: "Issues:", items: [
+                    { name: "Wallet Not Created", fullPath: "(UNMS) Complaint - Post Paid - System - Offer Not Reflected (Remedy) Complaint > Consumer > Services > Loyalty Program > Wallet Not Created", templateId: "weBonusTemplates" },
+                    { name: "Points Added On Wrong Number", fullPath: "(UNMS) Complaint - Post Paid - System - Offer Not Reflected (Remedy) Complaint > Consumer > Services > Loyalty Program > Points Added On Wrong Number", templateId: "weBonusTemplates" },
+                    { name: "Points Not Added", fullPath: "(UNMS) Complaint - Post Paid - System - CL Resources not added (Remedy) Complaint > Consumer > Services > Loyalty Program > Points Not Added", templateId: "weBonusTemplates" },
+                    { name: "Loyalty Vouchers Complaint", fullPath: "(UNMS) Complaint - Post Paid - System - CL Extra charges (Remedy) Complaint > Consumer > Services > Loyalty Program > Voucher Issue", templateId: "weBonusTemplates" },
+                    { name: "Redemption issue", fullPath: "(UNMS) Complaint - Post Paid - System - System Notification Not Received (Remedy) Complaint > Consumer > Services > Loyalty Program > Redemption", templateId: "weBonusTemplates" },
+                    { name: "Merchant Issue", fullPath: "(UNMS) Complaint - Post Paid - System - System Notification Not Received (Remedy) Complaint > Consumer > Services > Loyalty Program > Merchant Issue", templateId: "weBonusTemplates" },
+                    { name: "points not appeared on WE App", fullPath: "(UNMS) Complaint - Post Paid - System - Offer Not Reflected (Remedy) Complaint > Consumer > Services > Loyalty Program > Transaction Not Found On System", templateId: "weBonusTemplates" }
+                ]}
+            ],
+            templateCategories: [
+                { id: "wrongInfoTemplates", triggerKeyword: "Wrong Info", templates: [{ name: "Call center agent gave wrong information", text: "Customer was given wrong information about the service by call center agent", icon: "fas fa-info-circle" }, { name: "Retail store gave wrong info", text: "Retail store provided incorrect details about the postpaid plan", icon: "fas fa-store" }] },
+                { id: "wrongTransactionTemplates", triggerKeyword: "Wrong Transaction", templates: [{ name: "Call center wrong transaction", text: "Wrong transaction applied to account by call center, amount incorrect", icon: "fas fa-exchange-alt" }, { name: "Retail wrong transaction", text: "Retail store processed wrong transaction on postpaid account", icon: "fas fa-store" }] },
+                { id: "badAttitudeTemplates", triggerKeyword: "Bad Attitude", templates: [{ name: "Call center rude agent", text: "Call center agent had bad attitude, was rude and unhelpful", icon: "fas fa-angry" }, { name: "Retail staff rude", text: "Retail staff showed bad attitude, was not professional", icon: "fas fa-store" }] },
+                { id: "lackFollowUpTemplates", triggerKeyword: "Lack of follow up", templates: [{ name: "Call center no follow up", text: "Call center promised call back but never followed up", icon: "fas fa-phone-slash" }, { name: "Retail no follow up", text: "Retail store said they would resolve issue but no follow up", icon: "fas fa-store" }] },
+                { id: "policyTemplates", triggerKeyword: "Policy", templates: [{ name: "Policy dissatisfaction", text: "Customer Complaining from company policy & procedures regarding", icon: "fas fa-file-contract" }] },
+                { id: "billingTemplates", triggerKeyword: "Due Amount", templates: [{ name: "Due amount", text: "The customer has two unused invoices. Please proceed with the necessary refund to settle the account", icon: "fas fa-file-invoice-dollar" }, { name: "Counter Complaint", text: "CST insist to create complain for his usage for ADSL noted complain created upon CST request", icon: "fas fa-file-invoice-dollar" }, { name: "Deny Local data usage", text: "CST insist to create complain for his usage noted complain created upon CST request /Rate plan ______ / The date / time for wrong charge_________", icon: "fas fa-file-invoice-dollar" }] },
+                { id: "remedyTemplates", triggerKeyword: "Deal", templates: [{ name: "Deal Active CST template", text: "Outstanding Amount: ______ / Required date for the deal: ______", icon: "fas fa-check-circle" }, { name: "Deal Hotline CST template", text: "Outstanding Amount: ______ / Required date for the deal: ______ / Customer Contact Number ______", icon: "fas fa-phone-alt" }, { name: "Deal Suspension CST template", text: "Outstanding Amount: ______ / Required date for the deal: ______ / Customer Contact Number ______ / Suspension date : ______", icon: "fas fa-pause-circle" }, { name: "Extend old Deal template", text: "Outstanding Amount: ______ / Mention TT number: ______ / Required date for the deal ______", icon: "fas fa-clock" }] },
+                { id: "billingAdditionalTemplates", triggerKeyword: "Cash flow", templates: [{ name: "Cash flow problem template", text: "customer compliant that payment deduct from last bill while customer has due bill.", icon: "fas fa-money-bill-wave" }, { name: "Refund Prepayment Cash template", text: "Request refund of prepayment amount: ______", icon: "fas fa-undo-alt" }] },
+                { id: "weBonusTemplates", triggerKeyword: "Loyalty Program", templates: [
+                    { name: "Wallet Not Created", text: "WE Bonus wallet not created for customer. Please investigate and create wallet/ Contact Number ______, Clear Description: WE Bonus wallet not created for customer / Customer Code______", icon: "fas fa-wallet" },
+                    { name: "Points Added On Wrong Number", text: "Clear Description : Points were added to wrong number / Contact number: ______/ Customer Code: ______", icon: "fas fa-plus-circle" },
+                    { name: "Points Not Added", text: "Clear Description : Points not added to account after eligible transaction / Payment Date: ______ / Payment Method : (Cash or Visa) / Customer Code :______", icon: "fas fa-star" },
+                    { name: "Voucher Issue", text: "Clear Description :voucher code ______ not working / Voucher ID from couponz system ______ / Merchant Name______ / Expiry Date ______ / Date and time of visit ______", icon: "fas fa-ticket-alt" },
+                    { name: "Redemption", text: "Clear Description :customer tried to redeem points for but failed / Branch Name ______ /Merchant Name ______ / Date and time of visit ______ / Place of visit ______", icon: "fas fa-sync-alt" },
+                    { name: "Merchant Issue", text: "Clear Description :transaction with merchant failed / Branch Name ______ /Merchant Name ______ / Date and time of visit ______ / Place of visit ______", icon: "fas fa-store-alt" },
+                    { name: "Points not appeared on WE App", text: "Clear Description :Points not appearing on WE App / Transaction Number : ______ / Transaction Type:______ / Confirmation SMS (received or not received) / Date and time of visit :______", icon: "fas fa-mobile-alt" }
+                ]}
+            ],
+            suggestions: [
+                { name: "Customer called", text: "/ Customer called to complain about", icon: "📞" }, { name: "14/-/2026", text: " 14/-/2026", icon: "📅" }, { name: "30/-/2026", text: " 30/-/2026", icon: "📅" }, { name: "29/-/2026", text: " 29/-/2026", icon: "📅" }, { name: "According to customer", text: " / According to customer", icon: "🗣️" }, { name: "Immediate action", text: " / Requesting immediate action", icon: "⚡" }, { name: "Urgent", text: " / Please resolve urgently", icon: "🚨" }, { name: "Rate plan", text: " / Related to his Rate plan", icon: "📋" }, { name: "Concession", text: " customer complain from concession policy and want the concession as a bill deduction or debit amount regarding his ADSL technical problem Landline number:______ FMC Acc:______ TTS ID:______ Down Days:______", icon: "💰" }
+            ],
+            quickReference: [
+                { category: "Postpaid", subCategory: "Call Center", issue: "Wrong Info", displayPath: "Postpaid > Call Center > Wrong Info", fullPath: "(UNMS) Postpaid > Call Center > Wrong Info (Remedy) Complaint > Consumer > Escalation > Call Center > Wrong Info" },
+                { category: "Postpaid", subCategory: "Billing", issue: "Due Amount", displayPath: "Postpaid > Billing > Due Amount", fullPath: "(UNMS) Postpaid > Billing > Due Amount (Remedy) Complaint > Consumer > Billing> Due amount > Due amount" },
+                { category: "WE Bonus", subCategory: "Loyalty", issue: "Wallet Not Created", displayPath: "Wallet Not Created", fullPath: "(UNMS) Complaint - Post Paid - System - Offer Not Reflected (Remedy) Complaint > Consumer > Services > Loyalty Program > Wallet Not Created" }
+            ]
+        };
+        renderAllComponents();
+        document.getElementById('dataVersion').textContent = 'fallback';
+    }
+    
+    function renderAllComponents() {
+        if (!appData) return;
+        renderCategories();
+        renderTemplates();
+        renderSuggestions();
+        renderQuickReference();
+    }
+    
+    function renderCategories() {
+        const container = document.getElementById('categoriesContainer');
+        container.innerHTML = '';
+        appData.categories.forEach(cat => {
+            const card = document.createElement('div');
+            card.className = 'path-card' + (cat.highlight ? ' payment-highlight' : '');
+            card.innerHTML = `<div class="main-category"><i class="${cat.icon}"></i> ${cat.title}</div><div class="sub-category"><i class="fas fa-exclamation-circle"></i> ${cat.subtitle}</div><div>${cat.items.map(item => `<span class="issue-type" data-path="${item.fullPath.replace(/'/g, "\\'")}" onclick="selectPath('${item.fullPath.replace(/'/g, "\\'")}', this)">${item.name}</span>`).join('')}</div>`;
+            container.appendChild(card);
+        });
+    }
+    
+    function renderTemplates() {
+        const container = document.getElementById('templatesContainer');
+        container.innerHTML = '';
+        appData.templateCategories.forEach(tcat => {
+            const div = document.createElement('div');
+            div.id = tcat.id;
+            div.style.display = 'none';
+            tcat.templates.forEach(tmpl => {
+                const tmplDiv = document.createElement('div');
+                tmplDiv.className = 'template-card';
+                tmplDiv.onclick = () => replaceFullText(tmpl.text);
+                tmplDiv.innerHTML = `<i class="${tmpl.icon} text-purple-600 me-2"></i>${tmpl.name}`;
+                div.appendChild(tmplDiv);
+            });
+            container.appendChild(div);
+        });
+    }
+    
+    function renderSuggestions() {
+        const container = document.getElementById('suggestionsContainer');
+        container.innerHTML = '';
+        appData.suggestions.forEach(sug => {
+            const chip = document.createElement('span');
+            chip.className = 'suggestion-chip';
+            chip.onclick = () => replaceSelectedText(sug.text);
+            chip.innerHTML = `${sug.icon} ${sug.name}`;
+            container.appendChild(chip);
+        });
+    }
+    
+    function renderQuickReference() {
+        const tbody = document.getElementById('quickRefBody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        (appData.quickReference || []).forEach(ref => {
+            const row = document.createElement('tr');
+            row.className = 'path-row';
+            row.onclick = () => selectPathFromTable(ref.fullPath);
+            row.innerHTML = `<td>${ref.category}</td><td>${ref.subCategory}</td><td>${ref.issue}</td><td class="text-purple-600">${ref.displayPath}</td>`;
+            tbody.appendChild(row);
+        });
+    }
+    
+    function selectPath(fullPath, element) {
+        document.querySelectorAll('.issue-type').forEach(el => el.classList.remove('selected'));
+        element.classList.add('selected');
+        currentFullPath = fullPath;
+        updateSelectedPathDisplay(fullPath);
+        appData.templateCategories.forEach(tcat => {
+            const el = document.getElementById(tcat.id);
+            if (el) el.style.display = 'none';
+            if (fullPath.includes(tcat.triggerKeyword)) {
+                const el2 = document.getElementById(tcat.id);
+                if (el2) el2.style.display = 'block';
+            }
+        });
+    }
+    
+    function selectPathFromTable(fullPath) {
+        currentFullPath = fullPath;
+        updateSelectedPathDisplay(fullPath);
+        document.querySelectorAll('.issue-type').forEach(el => {
+            if (el.getAttribute('data-path') === fullPath) {
+                document.querySelectorAll('.issue-type').forEach(e => e.classList.remove('selected'));
+                el.classList.add('selected');
+            }
+        });
+    }
+    
+    function updateSelectedPathDisplay(fullPath) {
+        const el = document.getElementById('selectedPathDisplay');
+        if (fullPath.includes('(UNMS)') && fullPath.includes('(Remedy)')) {
+            const parts = fullPath.split('(Remedy)');
+            el.innerHTML = `<i class="fas fa-check-circle fa-2x text-purple-600 mb-2"></i><p class="fw-bold text-purple-800 mb-2">Selected:</p><div class="path-line"><span class="path-unms">${escapeHtml(parts[0].trim())}</span></div><div class="path-separator"></div><div class="path-line"><span class="path-remedy">(Remedy)${escapeHtml(parts[1])}</span></div>`;
+        } else {
+            el.innerHTML = `<i class="fas fa-check-circle fa-2x text-purple-600 mb-2"></i><p class="fw-bold text-purple-800 mb-1">Selected:</p><p class="text-purple-700">${escapeHtml(fullPath)}</p>`;
+        }
+    }
+    
+    function updateSelectedPathSummary(fullPath) {
+        const el = document.getElementById('selectedPathSummaryWithBreak');
+        if (fullPath.includes('(UNMS)') && fullPath.includes('(Remedy)')) {
+            const parts = fullPath.split('(Remedy)');
+            el.innerHTML = `<div class="summary-line"><span class="summary-unms">${escapeHtml(parts[0].trim())}</span></div><div class="summary-separator"></div><div class="summary-line"><span class="summary-remedy">(Remedy)${escapeHtml(parts[1])}</span></div>`;
+        } else {
+            el.innerHTML = `<span class="text-purple-600">${escapeHtml(fullPath)}</span>`;
+        }
+    }
+    
+    function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
+    
+    function replaceFullText(newText) {
+        const textarea = document.getElementById('problemDescription');
+        if (textarea) {
+            undoHistory.push(textarea.value);
+            if (undoHistory.length > 50) undoHistory.shift();
+            textarea.value = newText;
+            textarea.dispatchEvent(new Event('input', { bubbles: true }));
+            textarea.focus();
+            showMessage('Template applied', 'var(--purple-800)');
+        }
+    }
+    
+    function replaceSelectedText(newText) {
+        const textarea = document.getElementById('problemDescription');
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        if (start === end) {
+            textarea.value += (textarea.value ? ' ' : '') + newText;
+        } else {
+            textarea.value = textarea.value.substring(0, start) + newText + textarea.value.substring(end);
+            textarea.setSelectionRange(start + newText.length, start + newText.length);
+        }
+        textarea.focus();
+        textarea.dispatchEvent(new Event('input', { bubbles: true }));
+        showMessage('Text replaced', 'var(--purple-800)');
+    }
+    
+    function performUndo() {
+        const textarea = document.getElementById('problemDescription');
+        if (undoHistory.length > 1) {
+            undoHistory.pop();
+            textarea.value = undoHistory[undoHistory.length - 1];
+            textarea.dispatchEvent(new Event('input', { bubbles: true }));
+            showMessage('Undo successful', 'var(--purple-800)');
+        } else {
+            showMessage('Nothing to undo', '#6c757d');
+        }
+    }
+    
+    function showMessage(message, bgColor) {
+        const toast = document.createElement('div');
+        toast.className = 'undo-toast';
+        toast.innerHTML = `<i class="fas fa-info-circle me-2"></i> ${message}`;
+        toast.style.background = bgColor;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2000);
+    }
+    
+    function copyDescription() {
+        const text = document.getElementById('problemDescription').value;
+        if (!text.trim()) return showMessage('No text to copy', '#dc3545');
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById('copyButton');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => btn.innerHTML = orig, 2000);
+            showMessage('Text copied', 'var(--purple-800)');
+        });
+    }
+    
+    function setupUndo(textarea) {
+        undoHistory = [textarea.value];
+        textarea.addEventListener('input', () => {
+            if (undoHistory[undoHistory.length - 1] !== textarea.value) {
+                undoHistory.push(textarea.value);
+                if (undoHistory.length > 50) undoHistory.shift();
+            }
+        });
+    }
+    
+    function goToStep2() {
+        if (!currentFullPath) { showMessage('Please select a path first', '#dc3545'); return; }
+        document.getElementById('step1Content').style.display = 'none';
+        document.getElementById('step2Content').style.display = 'block';
+        document.getElementById('step1').classList.remove('active');
+        document.getElementById('step1').classList.add('completed');
+        document.getElementById('step2').classList.add('active');
+        updateSelectedPathSummary(currentFullPath);
+        const textarea = document.getElementById('problemDescription');
+        if (textarea && undoHistory.length === 0) setupUndo(textarea);
+    }
+    
+    function backToStep1() {
+        document.getElementById('step2Content').style.display = 'none';
+        document.getElementById('step1Content').style.display = 'block';
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step1').classList.add('active');
+        document.getElementById('step1').classList.remove('completed');
+    }
+    
+    function goToStep3() {
+        const desc = document.getElementById('problemDescription').value.trim();
+        if (!desc) { showMessage('Please describe the issue', '#dc3545'); return; }
+        document.getElementById('confirmPath').innerText = currentFullPath;
+        document.getElementById('confirmDescription').innerText = desc;
+        document.getElementById('step2Content').style.display = 'none';
+        document.getElementById('step3Content').style.display = 'block';
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step2').classList.add('completed');
+        document.getElementById('step3').classList.add('active');
+    }
+    
+    function restartProcess() {
+        document.getElementById('step3Content').style.display = 'none';
+        document.getElementById('step1Content').style.display = 'block';
+        document.getElementById('step1').classList.add('active');
+        document.getElementById('step1').classList.remove('completed');
+        document.getElementById('step2').classList.remove('active', 'completed');
+        document.getElementById('step3').classList.remove('active');
+        document.querySelectorAll('.issue-type').forEach(el => el.classList.remove('selected'));
+        currentFullPath = '';
+        document.getElementById('selectedPathDisplay').innerHTML = '<i class="fas fa-arrow-left fa-2x text-purple-400 mb-2"></i><p class="text-muted mb-0">No path selected yet</p>';
+        const textarea = document.getElementById('problemDescription');
+        if (textarea) { textarea.value = ''; undoHistory = ['']; }
+    }
+    
+    function submitComplaint() {
+        const checks = document.querySelectorAll('#step3Content .form-check-input');
+        let allChecked = true;
+        checks.forEach(c => { if (!c.checked) allChecked = false; });
+        if (!allChecked && !confirm('Not all boxes checked. Submit anyway?')) return;
+        const modal = new bootstrap.Modal(document.getElementById('successModal'));
+        modal.show();
+        document.getElementById('successModal').addEventListener('hidden.bs.modal', function() { restartProcess(); }, { once: true });
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        loadData(false);
+        document.getElementById('copyButton')?.addEventListener('click', copyDescription);
+        document.getElementById('undoButton')?.addEventListener('click', performUndo);
+        document.getElementById('refreshDataBtn')?.addEventListener('click', () => loadData(true));
+        
+        const textarea = document.getElementById('problemDescription');
+        if (textarea) {
+            textarea.addEventListener('dblclick', function(e) {
+                let start = this.selectionStart, end = this.selectionEnd, value = this.value;
+                if (start === end) {
+                    let left = start, right = start;
+                    while (left > 0 && value[left - 1] !== ' ' && value[left - 1] !== '\n') left--;
+                    while (right < value.length && value[right] !== ' ' && value[right] !== '\n') right++;
+                    if (left < right) { this.setSelectionRange(left, right); showMessage('Text selected, click a suggestion to replace', 'var(--purple-600)'); }
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

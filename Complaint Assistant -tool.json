@@ -1,0 +1,209 @@
+{
+  "version": "2.0.0",
+  "lastUpdate": "2026-04-07",
+  "categories": [
+    {
+      "id": "callCenter",
+      "title": "Postpaid > Call Center",
+      "icon": "fas fa-phone-alt",
+      "subtitle": "Issue Types:",
+      "highlight": false,
+      "items": [
+        { "name": "Wrong Info", "fullPath": "(UNMS) Postpaid > Call Center > Wrong Info (Remedy) Complaint > Consumer > Escalation > Call Center > Wrong Info", "templateId": "wrongInfoTemplates" },
+        { "name": "Wrong Transaction", "fullPath": "(UNMS) Postpaid > Call Center > Wrong Transaction (Remedy) Complaint > Consumer > Escalation > Call Center > Wrong Transaction", "templateId": "wrongTransactionTemplates" },
+        { "name": "Bad Attitude", "fullPath": "(UNMS) Postpaid > Call Center > Bad Attitude (Remedy) Complaint > Consumer > Escalation > Call Center > Aggressive -attitude", "templateId": "badAttitudeTemplates" },
+        { "name": "Lack of follow up", "fullPath": "(UNMS) Postpaid > Call Center > Lack of follow up (Remedy) Complaint > Consumer > Escalation > Call Center > Lack of follow up", "templateId": "lackFollowUpTemplates" }
+      ]
+    },
+    {
+      "id": "retail",
+      "title": "Postpaid > Retail",
+      "icon": "fas fa-store",
+      "subtitle": "Issue Types:",
+      "highlight": false,
+      "items": [
+        { "name": "Wrong Info", "fullPath": "(UNMS) Postpaid > Retail > Wrong Info (Remedy) Complaint > Consumer > Escalation > Retail > Wrong Info", "templateId": "wrongInfoTemplates" },
+        { "name": "Wrong Transaction", "fullPath": "(UNMS) Postpaid > Retail > Wrong Transaction (Remedy) Complaint > Consumer > Escalation > Retail > Wrong Transaction", "templateId": "wrongTransactionTemplates" },
+        { "name": "Bad Attitude", "fullPath": "(UNMS) Postpaid > Retail > Bad Attitude (Remedy) Complaint > Consumer > Escalation > Retail > Bad Attitude", "templateId": "badAttitudeTemplates" },
+        { "name": "Lack of follow up", "fullPath": "(UNMS) Postpaid > Retail > Lack of follow up (Remedy) Complaint > Consumer > Escalation > Retail > Lack of follow up", "templateId": "lackFollowUpTemplates" }
+      ]
+    },
+    {
+      "id": "policy",
+      "title": "Policy & Procedures",
+      "icon": "fas fa-file-contract",
+      "subtitle": "Issue Types:",
+      "highlight": false,
+      "items": [
+        { "name": "Policy – Dissatisfied", "fullPath": "(UNMS) Policy & procedures – policy – dissatisfied (Remedy) Complaint > Consumer > Policy and Procedures > Activation Process > Activation Process", "templateId": "policyTemplates" }
+      ]
+    },
+    {
+      "id": "billing",
+      "title": "Postpaid > Billing",
+      "icon": "fas fa-file-invoice-dollar",
+      "subtitle": "Issue Types:",
+      "highlight": true,
+      "items": [
+        { "name": "Due Amount", "fullPath": "(UNMS) Postpaid > Billing > Due Amount (Remedy) Complaint > Consumer > Billing> Due amount > Due amount", "templateId": "billingTemplates" }
+      ]
+    },
+    {
+      "id": "promiseToPay",
+      "title": "Promise to Pay",
+      "icon": "fas fa-handshake",
+      "subtitle": "Request Types:",
+      "highlight": false,
+      "items": [
+        { "name": "Deal Active CST", "fullPath": "Request > Consumer > Payment and Collection > Deal > Deal Active CST", "templateId": "remedyTemplates" },
+        { "name": "Deal Hotline CST", "fullPath": "Request > Consumer > Payment and Collection > Deal > Deal Hotline CST", "templateId": "remedyTemplates" },
+        { "name": "Deal Suspension CST", "fullPath": "Request > Consumer > Payment and Collection > Deal > Deal Suspension CST", "templateId": "remedyTemplates" },
+        { "name": "Extend old Deal", "fullPath": "Request > Consumer > Payment and Collection > Deal > Extend old Deal", "templateId": "remedyTemplates" }
+      ]
+    },
+    {
+      "id": "billingAdditional",
+      "title": "Billing (Additional)",
+      "icon": "fas fa-credit-card",
+      "subtitle": "Types:",
+      "highlight": false,
+      "items": [
+        { "name": "Cash flow problem", "fullPath": "Complaint > Consumer > Billing > Due amount-Cash Flow Problem > Cash flow problem", "templateId": "billingAdditionalTemplates" },
+        { "name": "Refund Prepayment Cash", "fullPath": "Request > Consumer > Payment and Collection > Refund Prepayment Cash > Refund Prepayment Cash", "templateId": "billingAdditionalTemplates" }
+      ]
+    },
+    {
+      "id": "loyalty",
+      "title": "WE Bonus (Loyalty Program)",
+      "icon": "fas fa-gift",
+      "subtitle": "Issues:",
+      "highlight": false,
+      "items": [
+        { "name": "Wallet Not Created", "fullPath": "(UNMS) Complaint - Post Paid - System - Offer Not Reflected (Remedy) Complaint > Consumer > Services > Loyalty Program > Wallet Not Created", "templateId": "weBonusTemplates" },
+        { "name": "Points Added On Wrong Number", "fullPath": "(UNMS) Complaint - Post Paid - System - Offer Not Reflected (Remedy) Complaint > Consumer > Services > Loyalty Program > Points Added On Wrong Number", "templateId": "weBonusTemplates" },
+        { "name": "Points Not Added", "fullPath": "(UNMS) Complaint - Post Paid - System - CL Resources not added (Remedy) Complaint > Consumer > Services > Loyalty Program > Points Not Added", "templateId": "weBonusTemplates" },
+        { "name": "Loyalty Vouchers Complaint", "fullPath": "(UNMS) Complaint - Post Paid - System - CL Extra charges (Remedy) Complaint > Consumer > Services > Loyalty Program > Voucher Issue", "templateId": "weBonusTemplates" },
+        { "name": "Redemption issue", "fullPath": "(UNMS) Complaint - Post Paid - System - System Notification Not Received (Remedy) Complaint > Consumer > Services > Loyalty Program > Redemption", "templateId": "weBonusTemplates" },
+        { "name": "Merchant Issue", "fullPath": "(UNMS) Complaint - Post Paid - System - System Notification Not Received (Remedy) Complaint > Consumer > Services > Loyalty Program > Merchant Issue", "templateId": "weBonusTemplates" },
+        { "name": "points not appeared on WE App", "fullPath": "(UNMS) Complaint - Post Paid - System - Offer Not Reflected (Remedy) Complaint > Consumer > Services > Loyalty Program > Transaction Not Found On System", "templateId": "weBonusTemplates" }
+      ]
+    }
+  ],
+  "templateCategories": [
+    {
+      "id": "wrongInfoTemplates",
+      "triggerKeyword": "Wrong Info",
+      "templates": [
+        { "name": "Call center agent gave wrong information", "text": "Customer was given wrong information about the service by call center agent", "icon": "fas fa-info-circle" },
+        { "name": "Retail store gave wrong info", "text": "Retail store provided incorrect details about the postpaid plan", "icon": "fas fa-store" }
+      ]
+    },
+    {
+      "id": "wrongTransactionTemplates",
+      "triggerKeyword": "Wrong Transaction",
+      "templates": [
+        { "name": "Call center wrong transaction", "text": "Wrong transaction applied to account by call center, amount incorrect", "icon": "fas fa-exchange-alt" },
+        { "name": "Retail wrong transaction", "text": "Retail store processed wrong transaction on postpaid account", "icon": "fas fa-store" }
+      ]
+    },
+    {
+      "id": "badAttitudeTemplates",
+      "triggerKeyword": "Bad Attitude",
+      "templates": [
+        { "name": "Call center rude agent", "text": "Call center agent had bad attitude, was rude and unhelpful", "icon": "fas fa-angry" },
+        { "name": "Retail staff rude", "text": "Retail staff showed bad attitude, was not professional", "icon": "fas fa-store" }
+      ]
+    },
+    {
+      "id": "lackFollowUpTemplates",
+      "triggerKeyword": "Lack of follow up",
+      "templates": [
+        { "name": "Call center no follow up", "text": "Call center promised call back but never followed up", "icon": "fas fa-phone-slash" },
+        { "name": "Retail no follow up", "text": "Retail store said they would resolve issue but no follow up", "icon": "fas fa-store" }
+      ]
+    },
+    {
+      "id": "policyTemplates",
+      "triggerKeyword": "Policy",
+      "templates": [
+        { "name": "Policy dissatisfaction", "text": "Customer Complaining from company policy & procedures regarding", "icon": "fas fa-file-contract" }
+      ]
+    },
+    {
+      "id": "billingTemplates",
+      "triggerKeyword": "Due Amount",
+      "templates": [
+        { "name": "Due amount", "text": "The customer has two unused invoices. Please proceed with the necessary refund to settle the account", "icon": "fas fa-file-invoice-dollar" },
+        { "name": "Counter Complaint", "text": "CST insist to create complain for his usage for ADSL noted complain created upon CST request", "icon": "fas fa-file-invoice-dollar" },
+        { "name": "Deny Local data usage", "text": "CST insist to create complain for his usage noted complain created upon CST request /Rate plan ______ / The date / time for wrong charge_________", "icon": "fas fa-file-invoice-dollar" }
+      ]
+    },
+    {
+      "id": "remedyTemplates",
+      "triggerKeyword": "Deal",
+      "templates": [
+        { "name": "Deal Active CST template", "text": "Outstanding Amount: ______ / Required date for the deal: ______", "icon": "fas fa-check-circle" },
+        { "name": "Deal Hotline CST template", "text": "Outstanding Amount: ______ / Required date for the deal: ______ / Customer Contact Number ______", "icon": "fas fa-phone-alt" },
+        { "name": "Deal Suspension CST template", "text": "Outstanding Amount: ______ / Required date for the deal: ______ / Customer Contact Number ______ / Suspension date : ______", "icon": "fas fa-pause-circle" },
+        { "name": "Extend old Deal template", "text": "Outstanding Amount: ______ / Mention TT number: ______ / Required date for the deal ______", "icon": "fas fa-clock" }
+      ]
+    },
+    {
+      "id": "billingAdditionalTemplates",
+      "triggerKeyword": "Cash flow",
+      "templates": [
+        { "name": "Cash flow problem template", "text": "customer compliant that payment deduct from last bill while customer has due bill.", "icon": "fas fa-money-bill-wave" },
+        { "name": "Refund Prepayment Cash template", "text": "Request refund of prepayment amount: ______", "icon": "fas fa-undo-alt" }
+      ]
+    },
+    {
+      "id": "weBonusTemplates",
+      "triggerKeyword": "Loyalty Program",
+      "templates": [
+        { "name": "Wallet Not Created", "text": "WE Bonus wallet not created for customer. Please investigate and create wallet/ Contact Number ______, Clear Description: WE Bonus wallet not created for customer / Customer Code______", "icon": "fas fa-wallet" },
+        { "name": "Points Added On Wrong Number", "text": "Clear Description : Points were added to wrong number / Contact number: ______/ Customer Code: ______", "icon": "fas fa-plus-circle" },
+        { "name": "Points Not Added", "text": "Clear Description : Points not added to account after eligible transaction / Payment Date: ______ / Payment Method : (Cash or Visa) / Customer Code :______", "icon": "fas fa-star" },
+        { "name": "Voucher Issue", "text": "Clear Description :voucher code ______ not working / Voucher ID from couponz system ______ / Merchant Name______ / Expiry Date ______ / Date and time of visit ______", "icon": "fas fa-ticket-alt" },
+        { "name": "Redemption", "text": "Clear Description :customer tried to redeem points for but failed / Branch Name ______ /Merchant Name ______ / Date and time of visit ______ / Place of visit ______", "icon": "fas fa-sync-alt" },
+        { "name": "Merchant Issue", "text": "Clear Description :transaction with merchant failed / Branch Name ______ /Merchant Name ______ / Date and time of visit ______ / Place of visit ______", "icon": "fas fa-store-alt" },
+        { "name": "Points not appeared on WE App", "text": "Clear Description :Points not appearing on WE App / Transaction Number : ______ / Transaction Type:______ / Confirmation SMS (received or not received) / Date and time of visit :______", "icon": "fas fa-mobile-alt" }
+      ]
+    }
+  ],
+  "suggestions": [
+    { "name": "Customer called", "text": "/ Customer called to complain about", "icon": "📞" },
+    { "name": "14/-/2026", "text": " 14/-/2026", "icon": "📅" },
+    { "name": "30/-/2026", "text": " 30/-/2026", "icon": "📅" },
+    { "name": "29/-/2026", "text": " 29/-/2026", "icon": "📅" },
+    { "name": "According to customer", "text": " / According to customer", "icon": "🗣️" },
+    { "name": "Immediate action", "text": " / Requesting immediate action", "icon": "⚡" },
+    { "name": "Urgent", "text": " / Please resolve urgently", "icon": "🚨" },
+    { "name": "Rate plan", "text": " / Related to his Rate plan", "icon": "📋" },
+    { "name": "Concession", "text": " customer complain from concession policy and want the concession as a bill deduction or debit amount regarding his ADSL technical problem Landline number:______ FMC Acc:______ TTS ID:______ Down Days:______", "icon": "💰" }
+  ],
+  "quickReference": [
+    { "category": "Postpaid", "subCategory": "Call Center", "issue": "Wrong Info", "displayPath": "Postpaid > Call Center > Wrong Info", "fullPath": "(UNMS) Postpaid > Call Center > Wrong Info (Remedy) Complaint > Consumer > Escalation > Call Center > Wrong Info" },
+    { "category": "Postpaid", "subCategory": "Call Center", "issue": "Wrong Transaction", "displayPath": "Postpaid > Call Center > Wrong Transaction", "fullPath": "(UNMS) Postpaid > Call Center > Wrong Transaction (Remedy) Complaint > Consumer > Escalation > Call Center > Wrong Transaction" },
+    { "category": "Postpaid", "subCategory": "Call Center", "issue": "Bad Attitude", "displayPath": "Postpaid > Call Center > Bad Attitude", "fullPath": "(UNMS) Postpaid > Call Center > Bad Attitude (Remedy) Complaint > Consumer > Escalation > Call Center > Aggressive -attitude" },
+    { "category": "Postpaid", "subCategory": "Call Center", "issue": "Lack of follow up", "displayPath": "Postpaid > Call Center > Lack of follow up", "fullPath": "(UNMS) Postpaid > Call Center > Lack of follow up (Remedy) Complaint > Consumer > Escalation > Call Center > Lack of follow up" },
+    { "category": "Postpaid", "subCategory": "Retail", "issue": "Wrong Info", "displayPath": "Postpaid > Retail > Wrong Info", "fullPath": "(UNMS) Postpaid > Retail > Wrong Info (Remedy) Complaint > Consumer > Escalation > Retail > Wrong Info" },
+    { "category": "Postpaid", "subCategory": "Retail", "issue": "Wrong Transaction", "displayPath": "Postpaid > Retail > Wrong Transaction", "fullPath": "(UNMS) Postpaid > Retail > Wrong Transaction (Remedy) Complaint > Consumer > Escalation > Retail > Wrong Transaction" },
+    { "category": "Postpaid", "subCategory": "Retail", "issue": "Bad Attitude", "displayPath": "Postpaid > Retail > Bad Attitude", "fullPath": "(UNMS) Postpaid > Retail > Bad Attitude (Remedy) Complaint > Consumer > Escalation > Retail > Bad Attitude" },
+    { "category": "Postpaid", "subCategory": "Retail", "issue": "Lack of follow up", "displayPath": "Postpaid > Retail > Lack of follow up", "fullPath": "(UNMS) Postpaid > Retail > Lack of follow up (Remedy) Complaint > Consumer > Escalation > Retail > Lack of follow up" },
+    { "category": "Policy", "subCategory": "Procedures", "issue": "Dissatisfied", "displayPath": "Policy & procedures – policy – dissatisfied", "fullPath": "(UNMS) Policy & procedures – policy – dissatisfied (Remedy) Complaint > Consumer > Policy and Procedures > Activation Process > Activation Process" },
+    { "category": "Postpaid", "subCategory": "Billing", "issue": "Due Amount", "displayPath": "Postpaid > Billing > Due Amount", "fullPath": "(UNMS) Postpaid > Billing > Due Amount (Remedy) Complaint > Consumer > Billing> Due amount > Due amount" },
+    { "category": "Promise to Pay", "subCategory": "Deal", "issue": "Deal Active CST", "displayPath": "Request > Consumer > Payment and Collection > Deal > Deal Active CST", "fullPath": "Request > Consumer > Payment and Collection > Deal > Deal Active CST" },
+    { "category": "Promise to Pay", "subCategory": "Deal", "issue": "Deal Hotline CST", "displayPath": "Request > Consumer > Payment and Collection > Deal > Deal Hotline CST", "fullPath": "Request > Consumer > Payment and Collection > Deal > Deal Hotline CST" },
+    { "category": "Promise to Pay", "subCategory": "Deal", "issue": "Deal Suspension CST", "displayPath": "Request > Consumer > Payment and Collection > Deal > Deal Suspension CST", "fullPath": "Request > Consumer > Payment and Collection > Deal > Deal Suspension CST" },
+    { "category": "Promise to Pay", "subCategory": "Deal", "issue": "Extend old Deal", "displayPath": "Request > Consumer > Payment and Collection > Deal > Extend old Deal", "fullPath": "Request > Consumer > Payment and Collection > Deal > Extend old Deal" },
+    { "category": "Billing", "subCategory": "Cash Flow", "issue": "Cash flow problem", "displayPath": "Complaint > Consumer > Billing > Due amount-Cash Flow Problem > Cash flow problem", "fullPath": "Complaint > Consumer > Billing > Due amount-Cash Flow Problem > Cash flow problem" },
+    { "category": "Billing", "subCategory": "Refund", "issue": "Refund Prepayment Cash", "displayPath": "Request > Consumer > Payment and Collection > Refund Prepayment Cash > Refund Prepayment Cash", "fullPath": "Request > Consumer > Payment and Collection > Refund Prepayment Cash > Refund Prepayment Cash" },
+    { "category": "WE Bonus", "subCategory": "Loyalty", "issue": "Wallet Not Created", "displayPath": "Wallet Not Created", "fullPath": "(UNMS) Complaint - Post Paid - System - Offer Not Reflected (Remedy) Complaint > Consumer > Services > Loyalty Program > Wallet Not Created" },
+    { "category": "WE Bonus", "subCategory": "Loyalty", "issue": "Points Added On Wrong Number", "displayPath": "Points Added On Wrong Number", "fullPath": "(UNMS) Complaint - Post Paid - System - Offer Not Reflected (Remedy) Complaint > Consumer > Services > Loyalty Program > Points Added On Wrong Number" },
+    { "category": "WE Bonus", "subCategory": "Loyalty", "issue": "Points Not Added", "displayPath": "Points Not Added", "fullPath": "(UNMS) Complaint - Post Paid - System - CL Resources not added (Remedy) Complaint > Consumer > Services > Loyalty Program > Points Not Added" },
+    { "category": "WE Bonus", "subCategory": "Loyalty", "issue": "Voucher Issue", "displayPath": "Voucher Issue", "fullPath": "(UNMS) Complaint - Post Paid - System - CL Extra charges (Remedy) Complaint > Consumer > Services > Loyalty Program > Voucher Issue" },
+    { "category": "WE Bonus", "subCategory": "Loyalty", "issue": "Redemption", "displayPath": "Redemption", "fullPath": "(UNMS) Complaint - Post Paid - System - System Notification Not Received (Remedy) Complaint > Consumer > Services > Loyalty Program > Redemption" },
+    { "category": "WE Bonus", "subCategory": "Loyalty", "issue": "Merchant Issue", "displayPath": "Merchant Issue", "fullPath": "(UNMS) Complaint - Post Paid - System - System Notification Not Received (Remedy) Complaint > Consumer > Services > Loyalty Program > Merchant Issue" },
+    { "category": "WE Bonus", "subCategory": "Loyalty", "issue": "points not appeared on WE App", "displayPath": "points not appeared on WE App", "fullPath": "(UNMS) Complaint - Post Paid - System - Offer Not Reflected (Remedy) Complaint > Consumer > Services > Loyalty Program > Transaction Not Found On System" }
+  ]
+}
